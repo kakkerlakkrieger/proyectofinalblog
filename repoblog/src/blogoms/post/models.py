@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
+#from django.shortcuts import reverse
+from django.urls import reverse
 # Create your models here.
 
 class Usuario(AbstractUser):
@@ -8,7 +10,6 @@ class Usuario(AbstractUser):
 
     def __str__(self):
         return self.username
-
 
 class Post(models.Model):
     titulo = models.CharField(max_length=100)
@@ -22,6 +23,26 @@ class Post(models.Model):
     def __str__(self):
         return self.titulo
 
+    def get_absolute_url(self):
+        return reverse("detalle", kwargs={
+            'slug':self.slug
+        })
+    @property
+    def comentario (self):
+        return self.comentario_set.all()
+    
+    @property
+    def get_comment_count(self):
+        return self.comment_set.all().count()
+    
+    @property
+    def get_view_count(self):
+        return self.postview_set.all().count()
+    
+    @property
+    def get_like_count(self):
+        return self.like_set.all().count()
+
 class Comentario(models.Model):
     usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -30,6 +51,7 @@ class Comentario(models.Model):
 
     def __str__(self):
         return self.user.username
+    
 
 
 class Ver_Post(models.Model):
