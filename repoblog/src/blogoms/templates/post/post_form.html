@@ -1,13 +1,17 @@
-{%extends "base.html" %}
+{% extends "base.html" %}
 
 
 {% block content %}
     <div class="container">
-        <h1>Esta es la vista de {{ view_type }}</h1>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class='btn btn-primary' type="submit">{{ view_type|title }}</button>
-        </form>
+        {% if request.user.is_authenticated %}
+            <h1>Esta es la vista de {{ view_type }}</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class='btn btn-primary' type="submit">{{ view_type|title }}</button>
+            </form>
+        {% else %}
+            <a href="{% url 'account_login' %}" class="btn btn-primary btn-block">Ingresa para crear post</a>
+        {% endif %}
     </div>
 {% endblock content %}

@@ -30,9 +30,9 @@ class PostDetailView(DetailView):
     def get_object(self, **kwargs):
         object=super().get_object(**kwargs)
         # if self.request.user.is_authenticated:
-        #     Ver_Post.objects.get_or_create(user=self.request.user, post=object)
-        #     #Ver_Post.objects
-        # return object
+        #      Ver_Post.objects.get_or_create(user=self.request.user, post=object)
+        #      Ver_Post.objects
+        return object
 
 class PostCreateView(CreateView):
     form_class = PostForm

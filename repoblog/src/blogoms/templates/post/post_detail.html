@@ -1,19 +1,22 @@
-{%extends "base.html" %}
-
+{% extends "base.html" %}
 
 {% block content %}
-    <div class="row">
+<div class="row">
     <div class="col-4 offset-4">
-    <div class="card" style="padding: 20px;">
-        <h1>{{object.titulo}}</h1>
-        <img src="{{ object.thumbnail.url }}" class="card-img-top" alt="...">
-        <hr/>
-        <p class="card-text">
-            Posted {{ object.fecha_creado|timesince }} ago
-        </p>
-        <div style="padding: 10px;">
-        <p>{{ object.contenido }}</p>
-        </div> 
+    <div class="card" style="padding: 10px;">
+        <div class="col-4">
+            <h1 class="">{{ object.titulo }}</h1>
+            <img src="{{ object.thumbnail.url }}" class="card-img-top">
+            <hr/>
+            <div>
+                <span class="float-right"> Escrito hace {{ object.fecha_creado|timesince }}</span>
+            </div>
+            <hr/>
+            <div style="padding: 10px;">
+            <p> {{ object.contenido }} </p>
+            </div>
+            <hr/>
+        </div>
         <div>
             {% if request.user.is_authenticated %}
                 <h4>Deja un comentario</h4>
