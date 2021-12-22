@@ -27,6 +27,7 @@ class Post(models.Model):
         return reverse("detalle", kwargs={
             'slug':self.slug
         })
+        
     @property
     def comentario (self):
         return self.comentario_set.all()
@@ -50,7 +51,7 @@ class Comentario(models.Model):
     contenido = models.TextField()
 
     def __str__(self):
-        return self.user.username
+        return self.usuario.username
     
 
 

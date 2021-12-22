@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-4 offset-4">
     <div class="card" style="padding: 10px;">
-        <div class="col-4">
+        <div class="col-90">
             <h1 class="">{{ object.titulo }}</h1>
             <img src="{{ object.thumbnail.url }}" class="card-img-top">
             <hr/>
@@ -12,8 +12,9 @@
                 <span class="float-right"> Escrito hace {{ object.fecha_creado|timesince }}</span>
             </div>
             <hr/>
-            <div style="padding: 10px;">
-            <p> {{ object.contenido }} </p>
+            <div class="col-40" style="padding: 10px;" >
+            <p style="text-align:justify"> {{ object.contenido }} </p>
+            <h5>{{ object.autor }}</h5>
             </div>
             <hr/>
         </div>
@@ -30,6 +31,7 @@
                 {% for comentario in object.comentario %}
                     <div>
                         <p>
+                            <h5>{{comentario.usuario}}</h5>
                             {{comentario.contenido}}
                             <br />
                             <small>{{ comentario.hora|timesince }} ago</small>
@@ -37,7 +39,7 @@
                     </div>
                 {% endfor %}
             {% else %}
-            <a href="{% url 'account_login' %}" class="btn btn-primary btn-block">Ingresa para comentar</a>
+            <a href="{% url 'account_login' %}" class="btn btn-primary btn-block">Ingresa para comenzar el debate</a>
             {% endif %}
         </div>
     </div>

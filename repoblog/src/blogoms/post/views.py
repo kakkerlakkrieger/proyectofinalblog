@@ -63,5 +63,12 @@ class PostUpdateView(UpdateView):
     # )
 
 class PostDeleteView(DeleteView):
+    form_class = PostForm
     model = Post
     success_url = '/'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'view_type':'delete'
+        })
+        return context
